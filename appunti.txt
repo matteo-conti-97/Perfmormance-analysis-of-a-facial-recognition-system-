@@ -23,3 +23,17 @@ DATI
 IDEE
 	• Valutare come cambia il bottleneck se alcuni nodi ricevono piú traffico di altri
 	• Considerare la possibilitá di avere autoscaling delle vm cloud al variare del tipo e della quantitá di traffico
+
+
+VARIABILI DI STATO VERSIONE 1
+	• Numero di scan di classe C nel nodo cloud i-esimo
+	• Numero di scan di classe E nel nodo edge i-esimo
+	• Classe del job i-esimo
+	• Utilizzazione del nodo cloud i-esimo
+
+
+VARIABILI DI STATO VERSIONE 2
+	• Numero di scan di classe C nel nodo cloud i-esimo
+	• Numero di scan di classe E nel nodo edge i-esimo
+	• Classe del job i-esimo
+	• Utilizzazione del nodo cloud i-esimo
