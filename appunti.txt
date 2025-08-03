@@ -1,0 +1,25 @@
+Ho un aeroporto in cui ho un sistema di riconoscimento facciale IoT basato su edge computing, in particolare ho degli scanner che catturano immagini di 5 tipi:
+	• Immagini sfocate
+	• Persone ok
+	• Persone sospette
+	• Persone pericolose
+	• Persone sconosciute
+Questa categorizzazione viene fatta da dei nodi edge sulla base di un loro database locale, nel caso di persone sconosciute l'immagine va inviata al cloud (ogni nodo edge ha una VM in cloud dedicata) per un ulteriore processamento il cui risultato torna al nodo edge che aggiorna il suo database.
+Tutte le altre immagini "escono" dal sistema.
+Chiamiamo le immagini di persone sconosciute scan di classe C e le altre scan di classe E.
+
+DATI
+	• N=30 nodi
+	• Il tasso di arrivo è di 42 scan/s ed ogni nodo gestisce 1.4 scan/s
+	• La probabilitá che una scansione sia di un utente sconosciuto è PC 
+	• La probabilitá di uscire dal sistema è 1-PC
+	• Il tempo che un nodo edge impiega per processare una scan di classe E è 500ms 
+	• Il tempo che un nodo edge impiega per salvare su db la risposta del cloud, cioè processare una scan di classe C è 100ms
+	• Il tempo che il cloud impiega a processare una scan di classe C è 800ms
+	• Il QOS è che il tempo di risposta per i job di classe E al nodo edge non deve superare i 3s
+	• Dato che abbiamo due tipi di job utilizziamo processor sharing come scheduling sui nodi edge e FIFO sul cloud
+
+
+IDEE
+    • Valutare come cambia il bottleneck nel caso di pochi sconosciuti se il cloud è distante quindi ha latenza non trascurabile
+    • Valutare come cambia il bottleneck se alcuni nodi ricevono piú traffico di altri. Lui dice di scannerizzare bar, file checkin, entrate terminal, scale mobili ecc verosimilmente il bar ha poche scan, mi aspetto che altre zone abbiano molto piú traffico di persone
