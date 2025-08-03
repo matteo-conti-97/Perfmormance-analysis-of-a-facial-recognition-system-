@@ -36,4 +36,5 @@ VARIABILI DI STATO VERSIONE 2
 	• Numero di scan di classe C nel nodo cloud i-esimo
 	• Numero di scan di classe E nel nodo edge i-esimo
 	• Classe del job i-esimo
-	• Utilizzazione del nodo cloud i-esimo
+	• Numero di vm nel nodo cloud i-esimo
+	• Utilizzazione della vm cloud i,j
