@@ -21,5 +21,5 @@ DATI
 
 
 IDEE
-    • Valutare come cambia il bottleneck nel caso di pochi sconosciuti se il cloud è distante quindi ha latenza non trascurabile
-    • Valutare come cambia il bottleneck se alcuni nodi ricevono piú traffico di altri. Lui dice di scannerizzare bar, file checkin, entrate terminal, scale mobili ecc verosimilmente il bar ha poche scan, mi aspetto che altre zone abbiano molto piú traffico di persone
+	• Valutare come cambia il bottleneck se alcuni nodi ricevono piú traffico di altri
+	• Considerare la possibilitá di avere autoscaling delle vm cloud al variare del tipo e della quantitá di traffico
