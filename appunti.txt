@@ -29,8 +29,6 @@ VARIABILI DI STATO VERSIONE 1
 	• Numero di scan di classe C nel nodo cloud i-esimo
 	• Numero di scan di classe E nel nodo edge i-esimo
 	• Classe del job i-esimo
-	• Utilizzazione del nodo cloud i-esimo
-
 
 VARIABILI DI STATO VERSIONE 2
 	• Numero di scan di classe C nel nodo cloud i-esimo
@@ -38,3 +36,20 @@ VARIABILI DI STATO VERSIONE 2
 	• Classe del job i-esimo
 	• Numero di vm nel nodo cloud i-esimo
 	• Utilizzazione della vm cloud i,j
+
+EVENTI VERSIONE 1
+    • Arrivo di una scan di classe E al nodo edge i-esimo (assunzione, tutti i job entrano come classe E)
+    • Arrivo di scan di classe C al nodo cloud i-esimo
+    • Partenza di una scan di classe E dal nodo edge i-esimo
+    • Partenza di una scan di classe C dal nodo cloud i-esimo = Arrivo di una scan di classe C al nodo edge i-esimo
+    • Partenza di una scan di classe C dal nodo edge i-esimo
+    • Switch da classe E a classe C di una scan di classe E al nodo edge i-esimo (quando il job viene inviato al cloud)
+
+EVENTI VERSIONE 2
+    • Arrivo di una scan di classe E al nodo edge i-esimo (assunzione, tutti i job entrano come classe E)
+    • Arrivo di scan di classe C al nodo cloud i-esimo
+    • Partenza di una scan di classe E dal nodo edge i-esimo
+    • Partenza di una scan di classe C dal nodo cloud i-esimo = Arrivo di una scan di classe C al nodo edge i-esimo
+    • Partenza di una scan di classe C dal nodo edge i-esimo
+    • Switch da classe E a classe C di una scan di classe E al nodo edge i-esimo (quando il job viene inviato al cloud)
+    • Spawn di una nuova VM nel nodo cloud i-esimo
