@@ -4,7 +4,8 @@ Ho un aeroporto in cui ho un sistema di riconoscimento facciale IoT basato su ed
 	• Persone sospette
 	• Persone pericolose
 	• Persone sconosciute
-Questa categorizzazione viene fatta da dei nodi edge sulla base di un loro database locale, nel caso di persone sconosciute l'immagine va inviata al cloud (ogni nodo edge ha una VM in cloud dedicata) per un ulteriore processamento il cui risultato torna al nodo edge che aggiorna il suo database.
+Questa categorizzazione viene fatta da dei nodi edge sulla base di un loro database locale, nel caso di persone sconosciute l'immagine va inviata
+al cloud (ogni nodo edge ha una VM in cloud dedicata) per un ulteriore processamento il cui risultato torna al nodo edge che aggiorna il suo database.
 Tutte le altre immagini "escono" dal sistema.
 Chiamiamo le immagini di persone sconosciute scan di classe C e le altre scan di classe E.
 
@@ -30,26 +31,79 @@ VARIABILI DI STATO VERSIONE 1
 	• Numero di scan di classe E nel nodo edge i-esimo
 	• Classe del job i-esimo
 
-VARIABILI DI STATO VERSIONE 2
+VARIABILI DI STATO VERSIONE 2 con autoscaling
 	• Numero di scan di classe C nel nodo cloud i-esimo
 	• Numero di scan di classe E nel nodo edge i-esimo
 	• Classe del job i-esimo
 	• Numero di vm nel nodo cloud i-esimo
-	• Utilizzazione della vm cloud i,j
+	• Utilizzazione del nodo cloud i-esimo
 
 EVENTI VERSIONE 1
-    • Arrivo di una scan di classe E al nodo edge i-esimo (assunzione, tutti i job entrano come classe E)
-    • Arrivo di scan di classe C al nodo cloud i-esimo
-    • Partenza di una scan di classe E dal nodo edge i-esimo
-    • Partenza di una scan di classe C dal nodo cloud i-esimo = Arrivo di una scan di classe C al nodo edge i-esimo
-    • Partenza di una scan di classe C dal nodo edge i-esimo
-    • Switch da classe E a classe C di una scan di classe E al nodo edge i-esimo (quando il job viene inviato al cloud)
+    EVENTI AL NODO EDGE
+    • Arrivo di una scan nel nodo edge i-esimo (assunzione, tutti i job entrano come classe E)
+    • Partenza di una scan di classe dal nodo edge i-esimo
+
+    EVENTI AL NODO CLOUD
+    • Arrivo di una scan nodo cloud i-esimo
+    • Partenza di una scan nodo cloud i-esimo
 
 EVENTI VERSIONE 2
-    • Arrivo di una scan di classe E al nodo edge i-esimo (assunzione, tutti i job entrano come classe E)
-    • Arrivo di scan di classe C al nodo cloud i-esimo
-    • Partenza di una scan di classe E dal nodo edge i-esimo
-    • Partenza di una scan di classe C dal nodo cloud i-esimo = Arrivo di una scan di classe C al nodo edge i-esimo
-    • Partenza di una scan di classe C dal nodo edge i-esimo
-    • Switch da classe E a classe C di una scan di classe E al nodo edge i-esimo (quando il job viene inviato al cloud)
+    EVENTI AL NODO EDGE
+    • Arrivo di una scan nel nodo edge i-esimo (assunzione, tutti i job entrano come classe E)
+    • Partenza di una scan di classe dal nodo edge i-esimo
+
+    EVENTI AL NODO CLOUD
+    • Arrivo di una scan nodo cloud i-esimo
+    • Partenza di una scan nodo cloud i-esimo
     • Spawn di una nuova VM nel nodo cloud i-esimo
+    • Kill di una VM nel nodo cloud i-esimo
+
+
+COSA SUCCEDE PER I VARI EVENTI VERSIONE 1
+    EVENTI AL NODO EDGE
+    • Arrivo di una scan di tipo E nel nodo edge i-esimo
+        ○ Aumento del numero di scan di classe E nel nodo edge i-esimo
+
+    • Partenza di una scan di classe E dal nodo edge i-esimo
+        ○ Diminuzione del numero di scan di classe E nel nodo edge i-esimo
+        ○ Conversione della scan di classe E in scan di classe C con probabilitá PC, schedulare l'evento di arrivo della scan di classe C al nodo cloud i-esimo
+        ○ Se la scan rimane di classe E, con probabilità 1-PC, la scan esce dal sistema
+
+    • Arrivo di una scan di classe C nel nodo edge i-esimo
+        ○ Aumento del numero di scan di classe C nel nodo cloud i-esimo
+
+    • Partenza di una scan di classe C dal nodo edge i-esimo
+        ○ Diminuzione del numero di scan di classe C nel nodo cloud i-esimo
+        ○ Convertire la scan di classe C in scan di classe E, la scan esce dal sistema
+
+    EVENTI AL NODO CLOUD
+    • Arrivo di una scan nodo cloud i-esimo
+        ○ Aumento del numero di scan di classe C nel nodo cloud i-esimo
+    • Partenza di una scan nodo cloud i-esimo
+        ○ Diminuzione del numero di scan di classe C nel nodo cloud i-esimo, schedulare l'evento di arrivo della scan di classe C al nodo edge i-esimoù
+
+
+COSA SUCCEDE PER I VARI EVENTI VERSIONE 2
+    EVENTI AL NODO EDGE
+    • Arrivo di una scan di tipo E nel nodo edge i-esimo
+        ○ Aumento del numero di scan di classe E nel nodo edge i-esimo
+
+    • Partenza di una scan di classe E dal nodo edge i-esimo
+        ○ Diminuzione del numero di scan di classe E nel nodo edge i-esimo
+        ○ Conversione della scan di classe E in scan di classe C con probabilitá PC, schedulare l'evento di arrivo della scan di classe C al nodo cloud i-esimo
+        ○ Se la scan rimane di classe E, con probabilità 1-PC, la scan esce dal sistema
+
+    • Arrivo di una scan di classe C nel nodo edge i-esimo
+        ○ Aumento del numero di scan di classe C nel nodo cloud i-esimo
+
+    • Partenza di una scan di classe C dal nodo edge i-esimo
+        ○ Diminuzione del numero di scan di classe C nel nodo cloud i-esimo
+        ○ Convertire la scan di classe C in scan di classe E, la scan esce dal sistema
+
+    EVENTI AL NODO CLOUD
+    • Arrivo di una scan nodo cloud i-esimo
+        ○ Aumento del numero di scan di classe C nel nodo cloud i-esimo
+        ○ Se l'utilizzazione del nodo cloud i-esimo supera una certa soglia X e il numero di vm è minore di un certo valore massimo, spawnare una nuova VM nel nodo cloud i-esimo
+    • Partenza di una scan nodo cloud i-esimo
+        ○ Diminuzione del numero di scan di classe C nel nodo cloud i-esimo, schedulare l'evento di arrivo della scan di classe C al nodo edge i-esimo
+        ○ Se l'utilizzazione del nodo cloud i-esimo scende sotto una certa soglia Y e il numero di vm è maggiore di un certo valore minimo, killare una VM nel nodo cloud i-esimo
