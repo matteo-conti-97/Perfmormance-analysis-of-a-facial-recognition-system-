@@ -4,8 +4,9 @@ Ho un aeroporto in cui ho un sistema di riconoscimento facciale IoT basato su ed
 	• Persone sospette
 	• Persone pericolose
 	• Persone sconosciute
-Questa categorizzazione viene fatta da dei nodi edge sulla base di un loro database locale, nel caso di persone sconosciute l'immagine va inviata
-al cloud (ogni nodo edge ha una VM in cloud dedicata) per un ulteriore processamento il cui risultato torna al nodo edge che aggiorna il suo database.
+Queste immagini vengono inviate a dei nodi edge che le categorizzano sulla base di un loro database locale, nel caso di persone sconosciute l'immagine viene inviata
+al cloud (ogni nodo edge ha una VM in cloud dedicata) per un ulteriore processamento con risorse e metodi non accessibili dai nodi edge, 
+il risultato della computazione nel nodo cloud ritorna al nodo edge che aggiorna il suo database locale.
 Tutte le altre immagini "escono" dal sistema.
 Chiamiamo le immagini di persone sconosciute scan di classe C e le altre scan di classe E.
 
