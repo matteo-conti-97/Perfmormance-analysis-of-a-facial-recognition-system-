@@ -1,4 +1,7 @@
-class Queue:
+from abc import ABC
+
+
+class Queue(ABC):
     def __init__(self):
         self.items = []
 
@@ -7,3 +10,6 @@ class Queue:
 
     def size(self):
         return len(self.items)
+
+    def push(self, item):
+        pass
