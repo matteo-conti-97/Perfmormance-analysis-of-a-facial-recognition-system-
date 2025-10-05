@@ -1,6 +1,5 @@
 class Server:
-    def __init__(self, capacity, busy=False):
-        self.capacity = capacity
+    def __init__(self, busy=False):
         self.busy = busy
 
     def is_busy(self):
@@ -8,6 +7,3 @@ class Server:
 
     def set_busy(self, busy):
         self.busy = busy
-
-    def get_capacity(self):
-        return self.capacity

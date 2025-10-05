@@ -1,9 +1,8 @@
 class Scan:
-    def __init__(self, scan_id, scan_type, service_demand):
+    def __init__(self, scan_id, scan_type, service_time):
         self.scan_id = scan_id
         self.scan_type = scan_type
-        self.service_demand = service_demand
-        self.service_time = 0.0
+        self.service_time = service_time
 
     def get_scan_id(self):
         return self.scan_id
@@ -13,9 +12,6 @@ class Scan:
 
     def set_scan_type(self, scan_type):
         self.scan_type = scan_type
-
-    def get_service_demand(self):
-        return self.service_demand
 
     def get_service_time(self):
         return self.service_time

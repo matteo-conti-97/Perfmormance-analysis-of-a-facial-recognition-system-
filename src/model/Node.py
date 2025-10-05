@@ -7,7 +7,11 @@ class Node(ABC):
     def get_node_id(self):
         return self.node_id
 
+    def is_full(self):
+        pass
+
     def get_server(self):
         pass
+
     def get_queue(self):
         pass
