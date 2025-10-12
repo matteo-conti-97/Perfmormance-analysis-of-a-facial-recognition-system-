@@ -13,6 +13,8 @@ class ProcessorSharingQueue(Queue):
         if item in self.items:
             self.items.remove(item)
             self._update_service_quantum()
+            return True
+        return False
 
     def _update_service_quantum(self):
         num_items = self.size()
