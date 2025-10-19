@@ -13,3 +13,6 @@ class EdgeNode(Node):
 
     def is_full(self):
         return self.server.is_busy()
+
+    def get_server(self):
+        return self.server

@@ -12,12 +12,12 @@ Chiamiamo le immagini di persone sconosciute scan di classe C e le altre scan di
 
 DATI
 	• N=30 nodi
-	• Il tasso di arrivo è di 42 scan/s ed ogni nodo gestisce 1.4 scan/s
+	• Il tasso di arrivo è di 42 scan/s ed ogni nodo gestisce 1.4 scan/s (esponenziale)
 	• La probabilitá che una scansione sia di un utente sconosciuto è PC 
 	• La probabilitá di uscire dal sistema è 1-PC
-	• Il tempo che un nodo edge impiega per processare una scan di classe E è 500ms 
-	• Il tempo che un nodo edge impiega per salvare su db la risposta del cloud, cioè processare una scan di classe C è 100ms
-	• Il tempo che il cloud impiega a processare una scan di classe C è 800ms
+	• Il tempo che un nodo edge impiega per processare una scan di classe E è 500ms (esponenziale)
+	• Il tempo che un nodo edge impiega per salvare su db la risposta del cloud, cioè processare una scan di classe C è 100ms (esponenziale)
+	• Il tempo che il cloud impiega a processare una scan di classe C è 800ms (esponenziale)
 	• Il QOS è che il tempo di risposta per i job di classe E al nodo edge non deve superare i 3s
 	• Dato che abbiamo due tipi di job utilizziamo processor sharing come scheduling sui nodi edge e FIFO sul cloud
 

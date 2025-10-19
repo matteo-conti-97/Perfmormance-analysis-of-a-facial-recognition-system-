@@ -19,3 +19,9 @@ class CloudNode(Node):
             if not server.is_busy():
                 return False
         return True
+
+    def get_server(self):
+        return self.server_list
+
+    def autoscaling_enabled(self):
+        return self.max_servers > self.min_servers
