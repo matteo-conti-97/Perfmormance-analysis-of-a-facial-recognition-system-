@@ -7,6 +7,7 @@ __EDGE_SAVE__ = 3
 
 class Simulation:
     def __init__(self, config):
+        #Read configuration parameters
         self.seed=config['seed']
         self.duration=config['duration']
         self.arrival_rate=config['arrival_rate']
@@ -19,9 +20,12 @@ class Simulation:
         self.min_cloud_nodes=config['min_cloud_nodes']
         self.max_cloud_nodes=config['max_cloud_nodes']
 
-        plantSeeds(self.seed)
-
+        #Build network
         self.network = Network(self.nodes, self.min_cloud_nodes, self.max_cloud_nodes)
+
+        #Initialize simulation variables
+        plantSeeds(self.seed)
+        self.clock=0.0
         self.arrival_temp=0.0
 
 
