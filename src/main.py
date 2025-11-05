@@ -26,10 +26,6 @@ if __name__ == "__main__":
         print("Error: 'seed' parameter is missing in the 'simulation' section.")
         sys.exit(1)
 
-    if not config["simulation"]["simulation_type"]:
-        print("Error: 'simulation_type' parameter is missing in the 'simulation' section.")
-        sys.exit(1)
-
     if not config["simulation"]["variable_scan_probability"]:
         print("Error: 'variable_scan_probability' parameter is missing in the 'simulation' section.")
         sys.exit(1)

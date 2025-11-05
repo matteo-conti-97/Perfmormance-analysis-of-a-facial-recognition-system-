@@ -2,7 +2,6 @@ class Scan:
     def __init__(self, scan_id, scan_type, service_time, arrival_time):
         self.scan_id = scan_id
         self.scan_type = scan_type
-        self.service_time = service_time
         self.arrival_time = arrival_time
         self.edge_start_time = None
         self.edge_end_time = None

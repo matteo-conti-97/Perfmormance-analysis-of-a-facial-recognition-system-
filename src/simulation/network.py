@@ -3,10 +3,10 @@ from src.model.EdgeNode import EdgeNode
 
 
 class Network:
-    def __init__(self, nodes, min_cloud_nodes=0, max_cloud_nodes=0):
+    def __init__(self, nodes, min_cloud_servers, max_cloud_servers):
         self.nodes = nodes
         self.edge_nodes = [EdgeNode(i) for i in range(nodes)]
-        self.cloud_nodes = [CloudNode(i, min_cloud_nodes, max_cloud_nodes) for i in range(nodes)]
+        self.cloud_nodes = [CloudNode(i, min_cloud_servers, max_cloud_servers) for i in range(nodes)]
 
 
     def get_nodes_number(self):
